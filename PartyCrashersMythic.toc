@@ -1,7 +1,7 @@
 ## Interface: 100200
 ## Title: PartyCrashers Mythic+ Helper
 ## Notes: Bereken je Mythic+ score in-game!
-## Version: 1.0
+## Version: 1.0.1
 ## DefaultState: enabled
 ## Author: Huskii
 ## IconTexture: Interface\AddOns\PartyCrashersMythic\Media\Logo-PC
