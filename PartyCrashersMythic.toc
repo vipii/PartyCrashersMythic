@@ -1,6 +1,6 @@
 ## Interface: 100200
-## Title: PartyCrashers Mythic+ Helper
-## Notes: Bereken je Mythic+ score in-game!
+## Title: PartyCrashers Mythic+ Calculator
+## Notes: Maximize your Mythic Plus rating with our new command feature!
 ## Version: 1.0.1
 ## DefaultState: enabled
 ## Author: Huskii
