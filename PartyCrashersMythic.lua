@@ -23,6 +23,7 @@ function pc.handleCommand(args)
     -- Validate key level range
     if keyLevel and (keyLevel < 2 or keyLevel > 50) then
         print("PartyCrashers Mythic+ Calculator: You can only enter keys between 2 and 50.")
+        print("Please try again")
         return
     end
 
