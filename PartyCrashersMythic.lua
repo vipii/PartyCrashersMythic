@@ -4,7 +4,6 @@ local pc = PartyCrashersMythicPlus
 
 -- Slash commands for easy access
 SLASH_PARTYCRASHERS1 = "/pc"
-SLASH_PARTYCRASHERS2 = "/partycrashers"
 
 -- Command list and handler
 SlashCmdList["PARTYCRASHERS"] = function(msg)
@@ -17,13 +16,13 @@ function pc.handleCommand(args)
 
     -- Check if Mythic Season is active
     if not pc.isMythicSeasonActive() then
-        print("PartyCrashers Mythic Plus Helper: There is currently no M+ season active!")
+        print("PartyCrashers Mythic+ Calculator: There is currently no M+ season active!")
         return
     end
 
     -- Validate key level range
     if keyLevel and (keyLevel < 2 or keyLevel > 50) then
-        print("PartyCrashers Mythic Plus Helper: You can only enter keys between 2 and 50.")
+        print("PartyCrashers Mythic+ Calculator: You can only enter keys between 2 and 50.")
         return
     end
 
@@ -50,7 +49,7 @@ end
 
 -- Prints usage instructions for the addon
 function pc.printUsageInstructions()
-    print("PartyCrashers Mythic Plus Helper can be used by using the following command:")
+    print("PartyCrashers Mythic+ Calculator can be used by using the following command:")
     print("/pc <key level>")
     print("Want to check a special week? Then use:")
     print("/pc <key level> <F|T>")
