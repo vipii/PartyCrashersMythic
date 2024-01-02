@@ -21,8 +21,8 @@ function pc.handleCommand(args)
     end
 
     -- Validate key level range
-    if keyLevel and (keyLevel < 2 or keyLevel > 50) then
-        print("PartyCrashers Mythic+ Calculator: You can only enter keys between 2 and 50.")
+    if keyLevel and (keyLevel < 2 or keyLevel > 30) then
+        print("PartyCrashers Mythic+ Calculator: You can only enter keys between 2 and 30.")
         print("Please try again")
         return
     end
@@ -56,7 +56,20 @@ function pc.printUsageInstructions()
     print("/pc <key level> <F|T>")
 end
 
--- Calculates the rating based on key level and affix
+-- Updated base score table for key levels
+pc.baseScores = {
+    [2] = 40, [3] = 45, [4] = 55, [5] = 60, [6] = 65, [7] = 75, [8] = 80, [9] = 85, [10] = 100,
+    [11] = 107, [12] = 114, [13] = 121, [14] = 128, [15] = 135, [16] = 142, [17] = 149,
+    [18] = 156, [19] = 163, [20] = 170, [21] = 177, [22] = 184, [23] = 191, [24] = 198,
+    [25] = 205, [26] = 212, [27] = 219, [28] = 226, [29] = 233, [30] = 240
+}
+
+-- Updated function to get the rating for a given key level
+function pc.getRatingForLevel(keyLevel)
+    return pc.baseScores[keyLevel] or 0
+end
+
+-- Updated function to calculate the rating based on key level and affix
 function pc.calculateRating(keyLevel, affix)
     local affixMap = { ["T"] = 1, ["F"] = 2 }
     local currentWeek = affix and affixMap[affix] or pc.getCurrentWeekAffixId()
@@ -69,14 +82,6 @@ function pc.getCurrentWeekAffixId()
     return C_MythicPlus.GetCurrentAffixes()[1].id - 8
 end
 
--- Returns the rating for a given key level
-function pc.getRatingForLevel(keyLevel)
-    if keyLevel < 10 then
-        return pc.sub10Ratings[keyLevel]
-    end
-    return keyLevel * 5 + 50 + (keyLevel - 10) * 2
-end
-
 -- Displays the rating information
 function pc.displayRatingInfo(keyLevel, rating, currentWeek)
     print("---- PartyCrashers Mythic Plus Helper ----")
@@ -85,7 +90,7 @@ function pc.displayRatingInfo(keyLevel, rating, currentWeek)
     pc.totalGain = 0
     for _, mapId in ipairs(C_ChallengeMode.GetMapTable()) do
         local gain = pc.calculateMapScore(mapId, rating)
-        if gain > 0 then
+        if gain > 1 then
             local mapName = C_ChallengeMode.GetMapUIInfo(mapId)
             print(mapName..": "..gain)
         end
@@ -94,12 +99,6 @@ function pc.displayRatingInfo(keyLevel, rating, currentWeek)
     print("Total points: "..pc.totalGain)
     print("---- PartyCrashers Mythic Plus Helper ----\n")
 end
-
--- Ratings for keys below level 10
-pc.sub10Ratings = {
-    [2] = 40, [3] = 45, [4] = 55, [5] = 60,
-    [6] = 65, [7] = 75, [8] = 80, [9] = 85
-}
 
 -- Types of affixes
 pc.affixTypes = { "Tyrannical", "Fortified" }
